@@ -7,3 +7,4 @@ from main branch
 3. npm run deploy
 
 it's at https://gsmithapps.github.io/supabase/
+
