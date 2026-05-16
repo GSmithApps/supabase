@@ -24,14 +24,31 @@ async function loadHabits() {
   habitsDiv.innerHTML = ''
 
   data.forEach((habit) => {
-    const row = document.createElement('div')
+const row = document.createElement('div')
+row.className = 'habit-card'
 
-    row.innerHTML = `
-      <strong>${habit.habit_label}</strong>
-      — performed ${habit.num_times_performed} times
-      — last: ${habit.time_most_recently_performed_at ?? 'never'}
-      <button>+</button>
-    `
+row.innerHTML = `
+  <div class="habit-info">
+    <div class="habit-title">
+      ${habit.habit_label}
+    </div>
+
+    <div class="habit-meta">
+      ${habit.num_times_performed} completions
+    </div>
+
+    <div class="habit-meta">
+      Last performed:
+      ${new Date(
+        habit.time_most_recently_performed_at
+      ).toLocaleString()}
+    </div>
+  </div>
+
+  <button class="plus-button">
+    +
+  </button>
+`
 
     const button = row.querySelector('button')
 

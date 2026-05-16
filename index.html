@@ -2,16 +2,128 @@
 <html>
   <head>
     <title>Habit Tracker</title>
+
+    <style>
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        background: #f5f7fb;
+        margin: 0;
+        padding: 40px;
+        color: #1f2937;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 42px;
+        margin-bottom: 30px;
+      }
+
+      .habit-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .habit-card {
+        background: white;
+        border-radius: 16px;
+        padding: 18px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow:
+          0 1px 3px rgba(0,0,0,0.05),
+          0 8px 24px rgba(0,0,0,0.04);
+      }
+
+      .habit-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .habit-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .habit-meta {
+        color: #6b7280;
+        font-size: 14px;
+      }
+
+      .plus-button {
+        border: none;
+        background: #2563eb;
+        color: white;
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+
+      .plus-button:hover {
+        transform: scale(1.08);
+        background: #1d4ed8;
+      }
+
+      .new-habit-form {
+        margin-top: 28px;
+        display: flex;
+        gap: 12px;
+      }
+
+      .new-habit-input {
+        flex: 1;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 16px;
+        font-size: 16px;
+        box-shadow:
+          0 1px 3px rgba(0,0,0,0.05),
+          0 4px 12px rgba(0,0,0,0.04);
+      }
+
+      .add-button {
+        border: none;
+        background: #111827;
+        color: white;
+        padding: 0 20px;
+        border-radius: 12px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .add-button:hover {
+        background: #000;
+      }
+    </style>
   </head>
+
   <body>
-    <h1>Habit Tracker</h1>
+    <div class="container">
+      <h1>Habit Tracker</h1>
 
-    <div id="habits"></div>
+      <div id="habits" class="habit-list"></div>
 
-    <form id="new-habit-form">
-      <input id="new-habit-input" placeholder="New habit" />
-      <button type="submit">Add habit</button>
-    </form>
+      <form id="new-habit-form" class="new-habit-form">
+        <input
+          id="new-habit-input"
+          class="new-habit-input"
+          placeholder="Add a new habit..."
+        />
+
+        <button class="add-button" type="submit">
+          Add
+        </button>
+      </form>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
