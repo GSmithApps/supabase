@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Habit Tracker</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
         font-family: Inter, system-ui, sans-serif;
@@ -103,6 +103,43 @@
       .add-button:hover {
         background: #000;
       }
+      @media (max-width: 600px) {
+  body {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .habit-card {
+    padding: 20px;
+  }
+
+  .habit-title {
+    font-size: 22px;
+  }
+
+  .habit-meta {
+    font-size: 16px;
+  }
+
+  .plus-button {
+    width: 52px;
+    height: 52px;
+    font-size: 30px;
+  }
+
+  .new-habit-form {
+    flex-direction: column;
+  }
+
+  .new-habit-input,
+  .add-button {
+    font-size: 18px;
+    padding: 16px;
+  }
+}
     </style>
   </head>
 
