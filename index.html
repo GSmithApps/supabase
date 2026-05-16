@@ -17,9 +17,9 @@
         margin: 0 auto;
       }
 
-      h1 {
-        font-size: 42px;
-        margin-bottom: 30px;
+      button,
+      input {
+        font: inherit;
       }
 
       .habit-list {
@@ -30,30 +30,56 @@
 
       .habit-card {
         background: white;
-        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
         padding: 18px 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 18px;
         box-shadow:
           0 1px 3px rgba(0,0,0,0.05),
           0 8px 24px rgba(0,0,0,0.04);
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s,
+          transform 0.15s;
+      }
+
+      .habit-card:hover,
+      .habit-card:focus-visible {
+        border-color: #93c5fd;
+        box-shadow:
+          0 1px 3px rgba(0,0,0,0.06),
+          0 12px 28px rgba(37,99,235,0.1);
+        outline: none;
+        transform: translateY(-1px);
       }
 
       .habit-info {
         display: flex;
         flex-direction: column;
         gap: 6px;
+        min-width: 0;
       }
 
       .habit-title {
         font-size: 20px;
         font-weight: 600;
+        overflow-wrap: anywhere;
       }
 
       .habit-meta {
         color: #6b7280;
         font-size: 14px;
+      }
+
+      .habit-marks {
+        color: #111827;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 14px;
+        overflow-wrap: anywhere;
       }
 
       .plus-button {
@@ -66,11 +92,21 @@
         font-size: 24px;
         cursor: pointer;
         transition: 0.15s;
+        flex: 0 0 auto;
       }
 
       .plus-button:hover {
         transform: scale(1.08);
         background: #1d4ed8;
+      }
+
+      .plus-button:disabled,
+      .detail-plus-button:disabled,
+      .detail-delete-button:disabled,
+      .label-save-button:disabled {
+        cursor: wait;
+        opacity: 0.65;
+        transform: none;
       }
 
       .new-habit-form {
@@ -79,10 +115,14 @@
         gap: 12px;
       }
 
+      .new-habit-form[hidden] {
+        display: none;
+      }
+
       .new-habit-input {
         flex: 1;
         border: none;
-        border-radius: 12px;
+        border-radius: 8px;
         padding: 14px 16px;
         font-size: 16px;
         box-shadow:
@@ -95,7 +135,7 @@
         background: #111827;
         color: white;
         padding: 0 20px;
-        border-radius: 12px;
+        border-radius: 8px;
         font-size: 15px;
         cursor: pointer;
       }
@@ -103,57 +143,251 @@
       .add-button:hover {
         background: #000;
       }
+
+      .empty-state,
+      .app-notice {
+        color: #6b7280;
+        font-size: 15px;
+        margin: 0;
+      }
+
+      .app-notice {
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        border-radius: 8px;
+        color: #9a3412;
+        padding: 12px 14px;
+      }
+
+      .detail-view {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        box-shadow:
+          0 1px 3px rgba(0,0,0,0.05),
+          0 8px 24px rgba(0,0,0,0.04);
+        padding: 22px;
+      }
+
+      .back-button {
+        background: transparent;
+        border: none;
+        color: #2563eb;
+        cursor: pointer;
+        font-size: 15px;
+        margin: 0 0 18px;
+        padding: 0;
+      }
+
+      .back-button:hover {
+        color: #1d4ed8;
+      }
+
+      .detail-header {
+        align-items: flex-start;
+        display: flex;
+        gap: 18px;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+
+      .detail-eyebrow {
+        color: #6b7280;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0;
+        margin: 0 0 6px;
+        text-transform: uppercase;
+      }
+
+      .detail-title {
+        font-size: 30px;
+        line-height: 1.15;
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .detail-actions {
+        display: flex;
+        flex: 0 0 auto;
+        gap: 10px;
+      }
+
+      .detail-plus-button {
+        border: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        font-size: 28px;
+        cursor: pointer;
+        flex: 0 0 auto;
+      }
+
+      .detail-plus-button {
+        background: #2563eb;
+        color: white;
+      }
+
+      .detail-plus-button:hover {
+        background: #1d4ed8;
+      }
+
+      .detail-delete-button {
+        border: none;
+        background: #fee2e2;
+        border-radius: 8px;
+        color: #991b1b;
+        cursor: pointer;
+        flex: 0 0 auto;
+        font-size: 15px;
+        font-weight: 700;
+        min-height: 48px;
+        padding: 0 16px;
+      }
+
+      .detail-delete-button:hover {
+        background: #fecaca;
+      }
+
+      .label-edit-form {
+        align-items: end;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr auto;
+        margin: 0 0 18px;
+      }
+
+      .label-edit-label {
+        color: #6b7280;
+        display: block;
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      .label-edit-input {
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        box-sizing: border-box;
+        color: #111827;
+        font-size: 16px;
+        padding: 12px 14px;
+        width: 100%;
+      }
+
+      .label-edit-input:focus {
+        border-color: #2563eb;
+        outline: 3px solid rgba(37,99,235,0.14);
+      }
+
+      .label-save-button {
+        background: #111827;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        min-height: 46px;
+        padding: 0 18px;
+      }
+
+      .label-save-button:hover {
+        background: #000;
+      }
+
+      .detail-stats {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0;
+      }
+
+      .detail-stat {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 14px;
+      }
+
+      .detail-stat dt {
+        color: #6b7280;
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+
+      .detail-stat dd {
+        color: #111827;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
       @media (max-width: 600px) {
-  body {
-    padding: 20px;
-  }
+        body {
+          padding: 20px;
+        }
 
-  h1 {
-    font-size: 34px;
-  }
+        .habit-card {
+          padding: 20px;
+        }
 
-  .habit-card {
-    padding: 20px;
-  }
+        .habit-title {
+          font-size: 22px;
+        }
 
-  .habit-title {
-    font-size: 22px;
-  }
+        .habit-meta {
+          font-size: 16px;
+        }
 
-  .habit-meta {
-    font-size: 16px;
-  }
+        .habit-marks {
+          font-size: 16px;
+        }
 
-  .plus-button {
-    width: 52px;
-    height: 52px;
-    font-size: 30px;
-  }
+        .plus-button {
+          width: 52px;
+          height: 52px;
+          font-size: 30px;
+        }
 
-  .new-habit-form {
-    flex-direction: column;
-  }
+        .new-habit-form {
+          flex-direction: column;
+        }
 
-  .new-habit-input,
-  .add-button {
-    font-size: 18px;
-    padding: 16px;
-  }
-}
+        .new-habit-input,
+        .add-button {
+          font-size: 18px;
+          padding: 16px;
+        }
+
+        .detail-header {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .detail-actions {
+          justify-content: flex-start;
+        }
+
+        .label-edit-form {
+          align-items: stretch;
+          grid-template-columns: 1fr;
+        }
+
+        .detail-stats {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
-    <script type="module" crossorigin src="/supabase/assets/index-CccA5u1-.js"></script>
+    <script type="module" crossorigin src="/supabase/assets/index-CobnEqs-.js"></script>
   </head>
 
   <body>
     <div class="container">
-      <h1>Habit Tracker</h1>
-
       <div id="habits" class="habit-list"></div>
 
       <form id="new-habit-form" class="new-habit-form">
         <input
           id="new-habit-input"
           class="new-habit-input"
+          aria-label="New habit name"
           placeholder="Add a new habit..."
         />
 
