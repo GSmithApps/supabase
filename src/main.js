@@ -13,7 +13,7 @@ async function loadHabits() {
   const { data, error } = await supabase
     .from('habit-data')
     .select('id, habit_label, num_times_performed, time_most_recently_performed_at')
-    .order('id')
+    .order('num_times_performed', { ascending: false })
 
   if (error) {
     console.error(error)
@@ -34,7 +34,7 @@ row.innerHTML = `
     </div>
 
     <div class="habit-meta">
-      ${habit.num_times_performed} completions
+      ${'X'.repeat(habit.num_times_performed)} - ${habit.num_times_performed}
     </div>
 
     <div class="habit-meta">
